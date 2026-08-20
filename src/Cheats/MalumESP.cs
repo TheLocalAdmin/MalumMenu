@@ -81,10 +81,10 @@ public static class MalumESP
     {
         try
         {
-            foreach (var playerState in meetingHud.playerStates)
+            foreach (var playerState in Utils.GetPlayerStates(meetingHud))
             {
                 // Fetch the NetworkedPlayerInfo of each playerState
-                var data = GameData.Instance.GetPlayerById(playerState.TargetPlayerId);
+                var data = GameData.Instance.GetPlayerById(playerState.PlayerId);
 
                 if (data.IsNull() || data.Disconnected || data.Outfits[PlayerOutfitType.Default].IsNull()) continue;
 

@@ -32,8 +32,8 @@ public static class Utils
     public static bool isHost => AmongUsClient.Instance && AmongUsClient.Instance.AmHost;
     public static bool isInGame => AmongUsClient.Instance && AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started && isPlayer;
     public static bool isMeeting => MeetingHud.Instance;
-    public static bool isMeetingVoting => isMeeting && MeetingHud.Instance.state is MeetingHud.VoteStates.Voted or MeetingHud.VoteStates.NotVoted;
-    public static bool isMeetingProceeding => isMeeting && MeetingHud.Instance.state is MeetingHud.VoteStates.Proceeding;
+    public static bool isMeetingVoting => isMeeting && MeetingHud.Instance.CurrentState is MeetingHud.MeetingStates.Voted or MeetingHud.MeetingStates.NotVoted;
+    public static bool isMeetingProceeding => isMeeting && MeetingHud.Instance.CurrentState is MeetingHud.MeetingStates.Proceeding;
     public static bool isExiling => ExileController.Instance && !(isAirshipMap && SpawnInMinigame.Instance.isActiveAndEnabled);
     public static bool isAnySabotageActive => ShipStatus.Instance && SabotageSystem.AnyActive;
     public static bool isNormalGame => GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal;
@@ -46,6 +46,20 @@ public static class Utils
     public static bool isFungleMap => (MapNames)GetCurrentMapID() == MapNames.Fungle;
     public const float DefaultSpeed = 2.5f;
     public const float DefaultGhostSpeed = 3f;
+
+    // Returns the list of player vote areas in a meeting
+    public static PlayerVoteArea[] GetPlayerStates(MeetingHud meetingHud)
+    {
+        if (meetingHud == null || meetingHud.playerStates == null) return new PlayerVoteArea[0];
+        return meetingHud.playerStates;
+    }
+
+    // Ends the current meeting's voting on the host (RpcVotingComplete is private in newer versions)
+    public static void CompleteVoting(MeetingHud.VoterState[] states, NetworkedPlayerInfo exiled, bool tie)
+    {
+        if (MeetingHud.Instance == null) return;
+        AccessTools.Method(typeof(MeetingHud), "RpcVotingComplete").Invoke(MeetingHud.Instance, new object[] { states, exiled, tie, false, (ushort)0 });
+    }
 
     // Checks if LocalPlayer's speed is at its default value
     public static bool IsSpeedDefault(bool forGhost = false)
