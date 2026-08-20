@@ -39,6 +39,7 @@
 
 | Mod Version| Among Us - Version | Link |
 |----------|-------------|-----------------|
+| v3.2.1 | 17.5 ( 2026.8.18 ) | [Download](https://github.com/TheLocalAdmin/MalumMenu/releases/tag/v3.2.1) |
 | v3.2.0 | 17.4 ( 2026.6.5 )<br>17.3 ( 2026.3.31 ) | [Download](https://github.com/scp222thj/MalumMenu/releases/tag/v3.2.0) |
 | v3.1.1 | 17.3 ( 2026.3.31 ) | [Download](https://github.com/scp222thj/MalumMenu/releases/tag/v3.1.1) |
 | v3.1.0 | 17.3 ( 2026.3.31 ) | [Download](https://github.com/scp222thj/MalumMenu/releases/tag/v3.1.0) |
@@ -82,7 +83,7 @@
 5. Wait for the console window to finish the installation.
 
 6. After installation, Among Us will automatically open with MalumMenu successfully installed.
-    - By default, you can toggle the cheat GUI on by pressing **DELETE** on your keyboard.
+    - By default, you can toggle the cheat GUI on by pressing **F1** on your keyboard.
 
 7. If the installation doesn't work, check out our [FAQ](#-faq).
 
